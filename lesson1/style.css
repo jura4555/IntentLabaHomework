@@ -1,0 +1,49 @@
+body {
+    height: 100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+header{
+    background: rgb(166, 226, 226);
+    margin: 0 0 10px;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background: greenyellow;
+    border: 2px solid darkblue;
+    margin: 10px;
+}
+
+#section1 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#section2 {
+    max-width: 450px;
+}
+
+h3 {
+    text-align: center;
+}
+
+footer ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+footer li {
+    margin-right: 20px;
+}
+
+footer a {
+    text-decoration: none;
+}
