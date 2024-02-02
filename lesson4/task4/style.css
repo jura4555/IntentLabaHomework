@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+}
+#cart {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    width: 300px;
+}
+#totalPrice {
+    font-weight: bold;
+}
+
+#cartItems li {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    list-style: none;
+    font-family: Arial, sans-serif;
+    align-items: center;
+}
+
