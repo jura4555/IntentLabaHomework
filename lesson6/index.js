@@ -7,14 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
   initialURL = window.location.href;
   const historyURL = [];
   historyURL.push(initialURL);
-
-
  
-
   function renderFilmsList() {
     initializeFilms();
     updateFilmList();
-
     const addFilmButton = document.createElement('button');
     addFilmButton.textContent = 'Додати фільм';
     addFilmButton.addEventListener('click', () => showAddFilmForm());
@@ -58,30 +54,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const currentURL = window.location.href; 
 
-
     let newURL;
     if (currentURL.includes('#')) {
       const baseURL = currentURL.split('#')[0].split('?')[0];
       newURL = `${baseURL}#add`; 
-      console.log(newURL);
     } else {
       newURL = `${currentURL}#add`;
-      console.log(newURL); 
     }
 
 
     historyURL.push(newURL);
     window.history.pushState(null, null, newURL);
-
-
-
-
-
-
-
-
-    // window.location.hash = '#add';
-    // historyURL.push(window.location.href);
 
     if (currentEditForm && currentEditForm.parentNode === rootElement) {
       rootElement.removeChild(currentEditForm);
@@ -184,19 +167,12 @@ document.addEventListener('DOMContentLoaded', function () {
       if (currentURL.includes('#')) {
         const baseURL = currentURL.split('#')[0].split('?')[0];
         newURL = `${baseURL}?id={${filmId}}#preview`; 
-        console.log(newURL);
       } else {
         newURL = `${currentURL}?id={${filmId}}#preview`;
-        console.log(newURL); 
       }
 
       historyURL.push(newURL);
       window.history.pushState(null, null, newURL);
-
-
-
-      // window.location.hash = `?id={${filmId}}#preview`;
-      // historyURL.push(window.location.href);
 
       const film = existingFilms[index];
 
@@ -247,17 +223,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (index >= 0 && index < existingFilms.length) {
 
-
       const currentURL = window.location.href; 
 
       let newURL;
       if (currentURL.includes('#')) {
         const baseURL = currentURL.split('#')[0].split('?')[0];
         newURL = `${baseURL}?id={${filmId}}#edit`; 
-        console.log(newURL);
       } else {
         newURL = `${currentURL}?id={${filmId}}#edit`; 
-        console.log(newURL);
       }
     
 
@@ -350,8 +323,7 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
 
-// треба переробити так щоб показувало те що було перед ним
-  window.cancelFilm = function () {
+    window.cancelFilm = function () {
     let permission = confirm('Скасувати зміни?');
     if (permission) {
       console.log(historyURL);
@@ -361,7 +333,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentURL.includes(`#add`)) {
           showAddFilmForm();
           window.location.href = currentURL;
-          console.log(historyURL);
         }
         else if (typeof currentURL === 'string' && currentURL.includes('?id=')) {
 
@@ -369,11 +340,9 @@ document.addEventListener('DOMContentLoaded', function () {
           if (currentURL.includes('#edit')) {
             showEditFilmForm(filmId);
             window.location.href = currentURL;
-            console.log(historyURL);
           } else if (currentURL.includes('#preview')) {
             showFilmDetails(filmId); 
             window.location.href = currentURL;
-            console.log(historyURL);
           }
         } else {
           window.location.href = currentURL;
@@ -385,9 +354,9 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
 
-
   // window.addEventListener('popstate', function(event) {
-  //   var newURL = event.currentTarget.location.href;
+    
+  //   var newURL = window.location.href;
     
   //   if (newURL.includes('#edit')) {
   //       var filmId = newURL.split('={')[1].split('}#')[0];
@@ -403,7 +372,24 @@ document.addEventListener('DOMContentLoaded', function () {
   // });
 
 
-  renderFilmsList();
-  
+    // function handleURL() {
+  //   const params = new URLSearchParams(window.location.search);
+  //   const rawFilmId = params.get('id');
+  //   const filmId = rawFilmId ? rawFilmId.replace(/[{}]/g, '') : null;
+  //   const hash = window.location.hash;
 
+  //   if (hash === '#add') {
+  //       showAddFilmForm();
+  //   } else if (filmId) {
+  //       if (hash === '#preview') {
+  //           showFilmDetails(filmId);
+  //       } else if (hash === '#edit') {
+  //           showEditFilmForm(filmId);
+  //       } else {
+  //           console.error('Invalid hash in URL.');
+  //       }
+  //   } 
+  // }
+
+  renderFilmsList();
 });
