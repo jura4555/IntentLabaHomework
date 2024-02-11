@@ -28,9 +28,15 @@ class App extends React.Component {
             throw new Error('Failed to get data');
         }
         const data = await response.json();
-        this.setState({ todoItems: data });
-        console.log('data:', data);
-        console.log('todoItems:', this.state.todoItems);
+        let initialArray = [];
+        for(let i = 0; i < data.length; i++){
+          initialArray.push({
+            index: data[i].id, 
+            title: data[i].title, 
+            done: data[i].completed
+          })
+        }
+        this.setState({ todoItems: initialArray });
     } catch (error) {
         console.error('An error occurred while receiving data:', error);
     }
