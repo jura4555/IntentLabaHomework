@@ -3,7 +3,7 @@ package com.intent.lesson11;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListImpl implements List {
+public class LinkedListImpl implements LinkedList {
     private Node first;
     private Node last;
     private int size;
@@ -27,7 +27,7 @@ public class LinkedListImpl implements List {
     @Override
     public void clear() {
         Node var2;
-        for (Node var1 = first; var1 != null; var1=var2){
+        for (Node var1 = first; var1 != null; var1 = var2) {
             var2 = var1.next;
             var1.item = null;
             var1.next = null;
@@ -58,11 +58,11 @@ public class LinkedListImpl implements List {
 
         @Override
         public Object next() {
-            if (currentNode == null){
+            if (currentNode == null) {
                 currentNode = first;
                 return currentNode.item;
             }
-            if (currentNode.next == null){
+            if (currentNode.next == null) {
                 throw new NoSuchElementException();
             }
             currentNode = currentNode.next;
@@ -70,19 +70,19 @@ public class LinkedListImpl implements List {
         }
     }
 
-    private Object unlinkNode(Node var1){
+    private Object unlinkNode(Node var1) {
         Object var2 = var1.item;
         Node var3 = var1.next;
         Node var4 = var1.prev;
-        if (var4 == null){
+        if (var4 == null) {
             first = var3;
-        }else {
+        } else {
             var4.next = var3;
             var1.prev = null;
         }
-        if (var3 == null){
+        if (var3 == null) {
             this.last = var4;
-        }else {
+        } else {
             var3.prev = var4;
             var1.next = null;
         }
@@ -97,9 +97,9 @@ public class LinkedListImpl implements List {
         Node nodeBefore = first;
         Node nodeAfter = new Node(null, element, nodeBefore);
         first = nodeAfter;
-        if (nodeBefore == null){
+        if (nodeBefore == null) {
             last = nodeAfter;
-        }else {
+        } else {
             nodeBefore.prev = nodeAfter;
         }
         ++size;
@@ -110,9 +110,9 @@ public class LinkedListImpl implements List {
         Node var2 = last;
         Node var3 = new Node(var2, element, null);
         last = var3;
-        if (var2 == null){
+        if (var2 == null) {
             first = var3;
-        }else {
+        } else {
             var2.next = var3;
         }
         ++size;
@@ -121,7 +121,7 @@ public class LinkedListImpl implements List {
     @Override
     public boolean removeFirst() {
         Node var1 = first;
-        if (var1 == null){
+        if (var1 == null) {
             return false;
         } else {
             unlinkFirst(var1);
@@ -129,15 +129,15 @@ public class LinkedListImpl implements List {
         }
     }
 
-    private Object unlinkFirst(Node var1){
-        Object var2 =  var1.item;
+    private Object unlinkFirst(Node var1) {
+        Object var2 = var1.item;
         Node var3 = var1.next;
         var1.item = null;
         var1.next = null;
         first = var3;
-        if (var3 == null){
+        if (var3 == null) {
             last = null;
-        }else {
+        } else {
             var3.prev = null;
         }
         --size;
@@ -147,23 +147,23 @@ public class LinkedListImpl implements List {
     @Override
     public boolean removeLast() {
         Node var1 = last;
-        if (var1 == null){
+        if (var1 == null) {
             return false;
-        }else {
+        } else {
             unlinkLast(var1);
             return true;
         }
     }
 
-    private Object unlinkLast(Node var1){
+    private Object unlinkLast(Node var1) {
         Object var2 = var1.item;
         Node var3 = var1.prev;
         var1.item = null;
         var1.prev = null;
         last = var3;
-        if (var3 == null){
+        if (var3 == null) {
             first = null;
-        }else {
+        } else {
             var3.next = null;
         }
         --size;
@@ -173,7 +173,7 @@ public class LinkedListImpl implements List {
     @Override
     public Object getFirst() {
         Object result = null;
-        if (first != null){
+        if (first != null) {
             result = first.item;
         }
         return result;
@@ -182,7 +182,7 @@ public class LinkedListImpl implements List {
     @Override
     public Object getLast() {
         Object result = null;
-        if (last != null){
+        if (last != null) {
             result = last.item;
         }
         return result;
@@ -191,7 +191,7 @@ public class LinkedListImpl implements List {
     @Override
     public boolean contains(Object element) {
         Node currentNode = first;
-        while (currentNode != null){
+        while (currentNode != null) {
             if (element == null) {
                 if (currentNode.item == null) {
                     return true;
@@ -209,15 +209,15 @@ public class LinkedListImpl implements List {
     @Override
     public boolean remove(Object element) {
         Node var2;
-        if (element == null){
+        if (element == null) {
             for (var2 = first; var2 != null; var2 = var2.next) {
-                if (var2.item == null){
+                if (var2.item == null) {
                     unlinkNode(var2);
                     return true;
                 }
             }
-        }else {
-            for (var2 = first; var2 != null; var2 = var2.next){
+        } else {
+            for (var2 = first; var2 != null; var2 = var2.next) {
                 if (element.equals(var2.item)) {
                     unlinkNode(var2);
                     return true;
@@ -254,12 +254,12 @@ public class LinkedListImpl implements List {
     @Override
     public String toString() {
         Iterator<Object> it = iterator();
-        if (! it.hasNext())
+        if (!it.hasNext())
             return "[]";
 
         StringBuilder sb = new StringBuilder();
         sb.append('[');
-        for (;;) {
+        for (; ; ) {
             Object e = it.next();
             sb.append(e);
             if (!it.hasNext())

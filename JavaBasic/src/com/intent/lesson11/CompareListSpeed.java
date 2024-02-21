@@ -5,9 +5,6 @@ import java.util.LinkedList;
 
 public class CompareListSpeed {
 
-    public CompareListSpeed() {
-    }
-
     public void addingToStart(long size) {
         ArrayList<Integer> arrayList = new ArrayList<>();
         LinkedList<Integer> linkedList = new LinkedList<>();
@@ -33,14 +30,14 @@ public class CompareListSpeed {
         LinkedList<Integer> linkedList = new LinkedList<>();
         long startTimeArrayList = System.nanoTime();
         for (int i = 0; i < size; i++) {
-            arrayList.add(arrayList.size()/2, i);
+            arrayList.add(arrayList.size() / 2, i);
         }
         long endTimeArrayList = System.nanoTime();
         long durationArrayListMiddle = endTimeArrayList - startTimeArrayList;
 
         long startTimeLinkedList = System.nanoTime();
         for (int i = 0; i < size; i++) {
-            linkedList.add(linkedList.size()/2, i);
+            linkedList.add(linkedList.size() / 2, i);
         }
         long endTimeLinkedList = System.nanoTime();
         long durationLinkedListMiddle = endTimeLinkedList - startTimeLinkedList;
