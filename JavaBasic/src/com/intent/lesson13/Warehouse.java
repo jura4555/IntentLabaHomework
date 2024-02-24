@@ -17,23 +17,25 @@ public class Warehouse {
         Good good3 = new Good("laptop", GOOD_AMOUNT);
         this.goods = new ArrayList<>(Arrays.asList(good1, good2, good3));
         this.capacity = goods.size() * GOOD_AMOUNT;
-        this.restockCount = 5;
+        this.restockCount = 3;
     }
 
     public synchronized void buy(String nameCustomer, String goodName, int quantity) {
         for (Good good : goods) {
             if (good.getName().equals(goodName)) {
-                if (good.getQuantity() >= quantity) {
+                if (good.getQuantity() >= quantity && good.getQuantity() > 0) {
                     good.setQuantity(good.getQuantity() - quantity);
-                    System.out.println("Customer: " + nameCustomer + " purchased " + quantity + " units of " + goodName);
-                    if (capacity * RESTOCK_THRESHOLD > getTotalQuantity() && restockCount > 0) {
-                        restock();
-                    }
-                    return;
-                } else {
-                    System.out.println("Good with a name " + good.getName() + " not enough to make a purchase");
-                    return;
+                    System.out.println("Customer: " + nameCustomer + " purchased " + quantity + " units of " + goodName
+                            + ". Remainder " + goodName + " in warehouse: " + good.getQuantity());
+                } else if(good.getQuantity() <= quantity && good.getQuantity() > 0){
+                    System.out.println("Customer: " + nameCustomer + " purchased " + good.getQuantity() + " units of " + goodName
+                            + ". Remainder " + goodName + " in warehouse: 0");
+                    good.setQuantity(0);
                 }
+                if (capacity * RESTOCK_THRESHOLD > getTotalQuantity() && restockCount > 0) {
+                    restock();
+                }
+                return;
             }
         }
         System.out.println("Good with name " + goodName + "not found in warehouse");
@@ -52,7 +54,7 @@ public class Warehouse {
             goods.get(i).setQuantity(GOOD_AMOUNT);
         }
         restockCount = restockCount - 1;
-        System.out.println("Goods in stock have been replenished");
+        System.out.println("Goods in warehouse have been replenished");
     }
 
     public synchronized boolean isAvailable() {

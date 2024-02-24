@@ -16,6 +16,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        System.out.println("Quantity of goods in warehouse: " + warehouse.getTotalQuantity());
         System.out.println("All customers have finished their purchases. The warehouse is having a sale!");
     }
 }
