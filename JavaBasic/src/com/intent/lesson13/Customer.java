@@ -21,10 +21,10 @@ public class Customer extends Thread {
         List<String> goodNameList = new ArrayList<>(Arrays.asList("TV", "table", "laptop"));
         while (warehouse.isAvailable()) {
             try {
-                Thread.sleep(random.nextInt(1000));
+                Thread.sleep(700);
                 int indexGood = random.nextInt(3);
                 String nameGood = goodNameList.get(indexGood);
-                int quantityGood = random.nextInt(20);
+                int quantityGood = random.nextInt(9) + 1;
                 warehouse.buy(name, nameGood, quantityGood);
             } catch (InterruptedException e) {
                 e.printStackTrace();
