@@ -23,7 +23,7 @@ public class Warehouse {
     public synchronized void buy(String nameCustomer, String goodName, int quantity) {
         for (Good good : goods) {
             if (good.getName().equals(goodName)) {
-                if (good.getQuantity() >= quantity && good.getQuantity() > 0) {
+                if (good.getQuantity() > quantity && good.getQuantity() > 0) {
                     good.setQuantity(good.getQuantity() - quantity);
                     System.out.println("Customer: " + nameCustomer + " purchased " + quantity + " units of " + goodName
                             + ". Remainder " + goodName + " in warehouse: " + good.getQuantity());
