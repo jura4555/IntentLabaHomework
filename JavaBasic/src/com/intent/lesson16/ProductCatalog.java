@@ -7,12 +7,9 @@ import java.util.stream.Collectors;
 public class ProductCatalog {
     private List<Product> products;
 
-    public ProductCatalog() {
-        this.products = new ArrayList<>();
-    }
 
     public void addProduct(String productName) {
-        if(products == null) {
+        if (products == null) {
             System.err.println("Product catalog is not exist. Please create a new product catalog");
             return;
         }
@@ -20,8 +17,8 @@ public class ProductCatalog {
         System.out.println("Product with name: '" + productName + "' was created.");
     }
 
-    public  void removeProductByIndex(int index) {
-        if(index > 0 && index <= products.size()) {
+    public void removeProductByIndex(int index) {
+        if (index > 0 && index <= products.size()) {
             products.remove(index - 1);
             System.out.println("Product with id: " + index + " was removed.");
         } else {
@@ -29,22 +26,26 @@ public class ProductCatalog {
         }
     }
 
-    public  void removeProductByName(String productName) {
+    public void removeProductByName(String productName) {
         List<Product> productsToRemove = findProductsByNameIgnoreCase(productName);
         removeProducts(productName, productsToRemove);
     }
 
     public void displayProducts() {
-        if(products.isEmpty()) {
+        if (products.isEmpty()) {
             System.out.println("Product list is empty. Please add new product");
             return;
         } else {
             System.out.println("Product list:");
-            for (int i = 0; i < products.size(); i++) {
-                System.out.println(i + 1 + ": " + products.get(i).getName());
+            int index = 1;
+            for (Product product : products) {
+                System.out.println(index + ": " + product.getName());
+                index++;
             }
+
         }
     }
+
 
     public void sortProduct() {
         products = products.stream()
@@ -59,7 +60,7 @@ public class ProductCatalog {
     }
 
     public void createCatalog() {
-        if(products == null) {
+        if (products == null) {
             products = new ArrayList<>();
         }
         products.clear();
@@ -83,13 +84,15 @@ public class ProductCatalog {
     }
 
     private void displayFilteredProducts(String key, List<Product> filteredProducts) {
-        if(filteredProducts.isEmpty()) {
+        if (filteredProducts.isEmpty()) {
             System.out.println("Products by key '" + key + "' not found");
             return;
         } else {
             System.out.println("Filtered product list by key: '" + key + "'");
-            for (int i = 0; i < filteredProducts.size(); i++) {
-                System.out.println(i + 1 + ": " + filteredProducts.get(i).getName());
+            int index = 1;
+            for (Product product : filteredProducts) {
+                System.out.println(index + ": " + product.getName());
+                index++;
             }
         }
     }
@@ -101,7 +104,7 @@ public class ProductCatalog {
     }
 
     private void removeProducts(String productName, List<Product> productsToRemove) {
-        if(!productsToRemove.isEmpty()) {
+        if (!productsToRemove.isEmpty()) {
             products.removeAll(productsToRemove);
             System.out.println("Product(s) with name: '" + productName + "' was removed.");
         } else {
